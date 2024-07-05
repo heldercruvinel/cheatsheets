@@ -1,7 +1,15 @@
-# Vim
-- **Commands** are actions that have an effect in your editor.
+# Credits
+- [Jaime Vintharas Github](https://github.com/vintharas)
+- [Learn Vim VSCode Extension](https://marketplace.visualstudio.com/items?itemName=vintharas.learn-vim)
 
-- **Motions** are commands that you use to move around in **Normal mode**
+# Vim
+
+>- **Commands** are actions that have an effect in your editor.
+>
+>- **Motions** are commands that you use to move around in **Normal mode**.
+>
+>- **Operators** are commands that let you perform actions to change the content of your editor.
+
 
 ## Words types
 Vim distinguishes between **words** and **WORDS**. 
@@ -27,6 +35,45 @@ type wwww ==> v   v v   v   v
               word. are two words
               word. is one WORD
 type WWW  ==> ^     ^  ^   ^
+```
+
+## Text Objects
+
+>Text objects are structured pieces of text that describe the parts in a document: words, sentences, quoted text, paragraphs, blocks, (HTML) tags, etc. You can use them in combination with operators to change a word, sentence, paragraph, etc.
+
+**`{a|i}{text-object}`**
+
+`{a|i}`:
+- `a` means around
+- `i` means inner
+
+>So *i*nner means that it applies to the inner part of a text object, whereas *a*round means that it applies to the complete text object including delimiters (in case of `(`, `{`, `"`, etc) or whitespace in case of words, sentences and paragraphs.
+
+`{text-object}`:
+- `w` - word
+- `s` - sentence
+- `p` - paragraph
+- `"` - quotes
+
+```
+            |- `a` means around
+            |- `i` means inner
+           /
+          /
+         /
+        {a|i}{text-object}
+                  /
+                 /
+                | w - word
+                | s - sentence
+                | p - paragraph
+                | " - quotes
+```
+
+And then you combine them with an operator like so:
+
+```
+{operator}{a|i}{text-object}
 ```
 
 ## Vim Modes
@@ -76,6 +123,31 @@ In that mode, Vim focus solely on `navigation/editing` super fast around the cod
 | **`{line}gg`** | To go to a specific line. |
 | **`G`** | To go to the end of the file. |
 | **`%`** | Jump to matching `({[]})`. |
+| **`d{motion}`** | Delete the text range defined by **motion**, ex: `dw`, `d$`, `d0` etc. |
+| **`{operator}{count}{motion}`** | Combine **operator**, **count** and **motion**, ex: `d2w`, `d5j` etc. |
+| **`u`** | To **undo** changes. |
+| **`<CTRL-R>`** | To **redo** changes. |
+| **`dd`**  | To **d**elete a complete line of text. | 
+| **`D`**  | To **D**elete from cursor until the end of the line, equal **`d$`**. |
+| **`dl`**  | Deletes the character under the cursor. |
+| **`dh`**  | Deletes the character before the cursor. |
+| **`x`**  | is equivalent to `dl` and deletes the character under the cursor. |
+| **`X`**  | is equivalent to `dh` and deletes the character before the cursor. |
+| **`c`**  | To **change command** deletes a piece of text from the cursor and then sends you into **Insert mode**, like **`d{motion}i`**. |
+| **`cc`** | Change a complete line. |
+| **`C`** | Changes from the cursor until the end of the line. |
+| **`ch`** | Deletes the character under the cursor and puts you into Insert mode. |
+| **`s`** | is equivalent to `ch`, deletes the character under the cursor and puts you into Insert mode. |
+| **`r`** | allows you to replace one single character for another. Very handy to fix typos. |
+| **`.`** | The **`.`** dot operator allows you to **repeate your last change**. |
+| **`{operator}{a\|i}{text-object}`** | Can combine all this three like `ciw`, `ca"`, `ci'` etc. |
+| **`y`** | (yank): Copy in Vim jargon. |
+| **`p`** | (put): Paste in Vim jargon. |
+| **`g~`** | (switch case): Changes letters from lowercase to uppercase and back. Alternatively, use `gu` to make something lowercase and `gU` to make something uppercase. |
+| **`~`** | To switch case for a single character. |
+| **`>`** | (shift right): Adds indentation. |
+| **`<`** | (shift left): Removes indentation. |
+| **`=`** | (format code): Formats code. |
 
 # Insert Mode
 In that mode Vim focus in `inserting` bits of text and code, just like a normal editor.
